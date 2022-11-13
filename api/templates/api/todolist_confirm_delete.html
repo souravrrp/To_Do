@@ -1,0 +1,80 @@
+{% extends 'api/base.html' %}
+{% block title %}Pivot Report{%endblock%}
+{% load static %}
+{% block content %}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">To Do List in Django</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'api:home' %}">Home</a></li>
+              <li class="breadcrumb-item active">To Do List in Django</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-12 card">
+            <div class="card-body">
+              <div class="col-md-12">
+
+                {% if messages %}
+                <div class="row">
+                  <div class="col-md-12">
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags %}{{ message.tags }} {% endif %}" role="alert">
+                      <p class="mb-0 text-center">{{ message }}</p>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endif %}
+                    
+                <!-- Content start -->
+
+                <!--todolist_confirm_delete.html-->
+
+                <h3>Delete List</h3>
+
+                <p>Are you sure you want to delete the list <i>{{ object.title }}</i>?</p>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <input
+                        value="Yes, delete."
+                        type="submit">
+                </form>
+                <input
+                    value="Cancel"
+                    type="button"
+                    onclick=location.href='{% url "api:index" %}';>
+
+                <!-- Content end -->
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content -->
+</div>
+  <!-- /.content-wrapper -->
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
