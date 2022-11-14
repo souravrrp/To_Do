@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
 
   <!-- Custom CSS -->
-  <!-- <script src="{% static 'custom/todo.css' %}"></script> -->
+  <script src="{% static 'custom/todo.css' %}"></script>
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
@@ -32,7 +32,7 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         {% url 'api:index' as index_url %}
-        <a href="{% url 'api:index' %}" class="nav-link {% if request.path == index_url %}active{% endif %}">AppName</a>
+        <a class="col-12 card" href="{% url 'api:index' %}" class="nav-link {% if request.path == index_url %}active{% endif %}">To Do List</a>
       </li>
       
     </ul>
@@ -59,7 +59,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{% url 'api:home' %}" class="brand-link text-center">
-      <span><img src="{% static 'img/medic.png' %}" class="brand-mini-logo" alt="SBL REPORT ARCHIVE"></span>
+      <span><img src="{% static 'img/todo.png' %}" class="brand-mini-logo" alt="SBL REPORT ARCHIVE"></span>
     </a>
 
     <!-- Sidebar -->
@@ -68,10 +68,20 @@
       <nav class="mt-2">
         <!-- Home -->
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          {% url 'api:index' as index_url %}  
+          <li class="nav-item">
+            <a href="{% url 'api:index' %}" class="nav-link {% if request.path == index_url %}active{% endif %}">
+              <i class="nav-icon fa fa-list-alt text-white"></i>
+              <p>To Do</p>
+            </a>
+          </li>
+        </ul>
+        <!-- Home -->
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           {% url 'api:home' as home_url %}  
           <li class="nav-item">
             <a href="{% url 'api:home' %}" class="nav-link {% if request.path == home_url %}active{% endif %}">
-              <i class="nav-icon fas fa-tachometer-alt text-white"></i>
+              <i class="nav-icon fa fa-home text-white"></i>
               <p>Home</p>
             </a>
           </li>
