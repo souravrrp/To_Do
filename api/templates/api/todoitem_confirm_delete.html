@@ -51,13 +51,18 @@
 
                 <form method="POST">
                     {% csrf_token %}
-                    <input
+                    <button
+                        type="submit"
                         value="Yes, delete."
-                        type="submit">
-                    <input
-                        value="Cancel"
+                        class="btn btn-danger font-weight-bold">
+                        Yes, delete.
+                    </button>
+                    <button
                         type="button"
-                        onclick=location.href='{% url "api:list" todo_list.id %}';>
+                        onclick=location.href='{% url "api:list" todo_list.id %}';
+                        class="btn btn-primary font-weight-bold">
+                        Cancel
+                    </button>
                 </form>
 
                 <!-- Content end -->

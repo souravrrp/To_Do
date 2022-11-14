@@ -8,9 +8,9 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 <li class="breadcrumb-item"><a href="{% url 'api:index' %}"></li>
+            <h1 class="breadcrumb-item"><a href="{% url 'api:index' %}"></li>
               DJango To-do Lists
-          </h1>
+            </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -53,28 +53,32 @@
                 </div>
                 {% endif %}
               <!-- Content start -->
-              <div>
+              <div class="callout callout-info table-responsive">
                 {% if object_list %}
-                <h3>Sourav All Lists</h3>
+                <h3 class="col-3 card text-white-50 bg-dark">All To Do Lists</h3>
                 {% endif %}
                 <ul>
                     {% for todolist in object_list %}
-                    <li>
+                    <span class="rounded-pill">
+                      <li class="col-4 card">
                         <div
                         role="button"
                         onclick=location.href='{% url "api:list" todolist.id %}'>   
-                        {{ todolist.title }}
+                        <span class="font-weight-bold text-info">{{ todolist.title }}</span>
                         </div>
                     </li>
+                    </span>
                     {% empty %}
                     <h4>You have no lists!</h4>
                     {% endfor %}
                 </ul>
                 <p>
-                  <input
-                  value="Add a new list"
+                  <button
+                  class="btn btn-primary ml-2 font-weight-bold"
                   type="button"
-                  onclick=location.href='{% url "api:list-add" %}'/>
+                  onclick=location.href='{% url "api:list-add" %}'>
+                  Add a new list
+                  </button>
                 </p>
               </div>
               <!-- Content end -->

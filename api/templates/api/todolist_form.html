@@ -1,5 +1,5 @@
 {% extends 'api/base.html' %}
-{% block title %}Pivot Report{%endblock%}
+{% block title %}To DO List Form{%endblock%}
 {% load static %}
 {% block content %}
 
@@ -45,20 +45,22 @@
                 <!-- Content start -->
 
                 <h3>{{ title }}</h3>
-                <div>
-                    <div>
-                        <form method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <input
-                                value="Save"
-                                type="submit">
-                            <input
-                                value="Cancel"
-                                type="button"
-                                onclick=location.href='{% url "api:index" %}';>
-                        </form>
-                    </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <span class="form-control">{{ form.as_p }}</span>
+                        <br>
+                        <input
+                            class="btn btn-md btn-primary ml-2 font-weight-bold"
+                            value="Save"
+                            type="submit"
+                            onclick=location.href='{% url "api:index" %}'>
+                        <input
+                            class="btn btn-danger btn-primary ml-2 font-weight-bold"
+                            value="Cancel"
+                            type="button"
+                            onclick=location.href='{% url "api:index" %}'>
+                    </form>
                 </div>
                 <!-- Content end -->
 

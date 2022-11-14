@@ -11,22 +11,25 @@ from .models import ToDoList, ToDoItem
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello World!");
+    return HttpResponse("Hello World!")
 
 def home_view(request):
+    all_list = ToDoList.objects.all()
+    all_items = ToDoItem.objects.all()
+    count_items=ToDoItem.objects.count()
     home = "Home"
     print(home)
-    context={'home': home}
-    return render(request, 'api/home.html',context);
+    context={'home': home, "all_list":all_list, "all_items":all_items,"count_items":count_items}
+    return render(request, 'api/home.html',context)
 
 
 class ListListView(ListView):
     model = ToDoList
-    template_name = "api/index.html";
+    template_name = "api/index.html"
 
 class ItemListView(ListView):
     model = ToDoItem
-    template_name = "api/todo_list.html";
+    template_name = "api/todo_list.html"
 
     def get_queryset(self):
         return ToDoItem.objects.filter(todo_list_id=self.kwargs["list_id"]);
@@ -34,7 +37,7 @@ class ItemListView(ListView):
     def get_context_data(self):
         context = super().get_context_data()
         context["todo_list"] = ToDoList.objects.get(id=self.kwargs["list_id"])
-        return context;
+        return context
 
 class ListCreate(CreateView):
     model = ToDoList
@@ -43,7 +46,7 @@ class ListCreate(CreateView):
     def get_context_data(self):
         context = super(ListCreate, self).get_context_data()
         context["title"] = "Add a new list"
-        return context;
+        return context
 
 class ItemCreate(CreateView):
     model = ToDoItem
@@ -58,17 +61,17 @@ class ItemCreate(CreateView):
         initial_data = super(ItemCreate, self).get_initial()
         todo_list = ToDoList.objects.get(id=self.kwargs["list_id"])
         initial_data["todo_list"] = todo_list
-        return initial_data;
+        return initial_data
 
     def get_context_data(self):
         context = super(ItemCreate, self).get_context_data()
         todo_list = ToDoList.objects.get(id=self.kwargs["list_id"])
         context["todo_list"] = todo_list
         context["title"] = "Create a new item"
-        return context;
+        return context
 
     def get_success_url(self):
-        return reverse("api:list", args=[self.object.todo_list_id]);
+        return reverse("api:list", args=[self.object.todo_list_id])
 
 class ItemUpdate(UpdateView):
     model = ToDoItem
@@ -83,24 +86,24 @@ class ItemUpdate(UpdateView):
         context = super(ItemUpdate, self).get_context_data()
         context["todo_list"] = self.object.todo_list
         context["title"] = "Edit item"
-        return context;
+        return context
 
     def get_success_url(self):
-        return reverse("api:list", args=[self.object.todo_list_id]);
+        return reverse("api:list", args=[self.object.todo_list_id])
 
 class ListDelete(DeleteView):
     model = ToDoList
     # You have to use reverse_lazy() instead of reverse(),
     # as the urls are not loaded when the file is imported.
-    success_url = reverse_lazy("api:index");
+    success_url = reverse_lazy("api:index")
 
 class ItemDelete(DeleteView):
     model = ToDoItem
 
     def get_success_url(self):
-        return reverse_lazy("api:list", args=[self.kwargs["list_id"]]);
+        return reverse_lazy("api:list", args=[self.kwargs["list_id"]])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["api:todo_list"] = self.object.todo_list
-        return context;
+        return context

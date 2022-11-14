@@ -1,5 +1,5 @@
 {% extends 'api/base.html' %}
-{% block title %}Pivot Report{%endblock%}
+{% block title %}To Do List: Edit{%endblock%}
 {% load static %}
 {% block content %}
 
@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">To Do List in Django</h1>
+            <h1 href="{% url 'api:index' %}" class="m-0">To Do List in Django</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -43,12 +43,11 @@
                 {% endif %}
                     
                 <!-- Content start -->
-
-                  <div>
+                <span>
                     <div>
                         <div>
-                            <h3>Edit list:</h3>
-                            <h5>{{ todo_list.title | upper }}</h5>
+                            <h3 class="badge btn-danger">Edit list:</h3>
+                            <h3 class="text-success">{{ todo_list.title | upper }}</h3>
                         </div>
                         <ul>
                             {% for todo in object_list %}
@@ -57,27 +56,31 @@
                                     <div
                                         role="button"
                                         onclick=location.href='{% url "api:item-update" todo_list.id todo.id %}'>
-                                        {{ todo.title }}
-                                        (Due {{ todo.due_date | date:"l, F j" }})
+                                        <h5 class="p-1 bg-info text-white rounded-pill col-sm-6 text-center">
+                                          {{ todo.title }}
+                                          (Due {{ todo.due_date | date:"l, F j" }})
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
                             {% empty %}
-                            <p>There are no to-do items in this list.</p>
+                            <h2 class="badge bg-warning font-italic">There are no to-do items in this list.</h2>
                             {% endfor %}
                         </ul>
                         <p>
                             <input
+                                class="btn btn-md btn-primary ml-2 font-weight-bold"
                                 value="Add a new item"
                                 type="button"
                                 onclick=location.href='{% url "api:item-add" todo_list.id %}' />
                             <input
+                                class="btn btn-danger btn-primary ml-2 font-weight-bold"
                                 value="Delete this list"
                                 type="button"
                                 onclick=location.href='{% url "api:list-delete" todo_list.id %}' />
                         </p>
                     </div>
-                </div>
+                  </span>
                 <!-- Content end -->
 
 

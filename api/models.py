@@ -7,11 +7,14 @@ from django.urls import reverse
 def one_week_hence():
     return timezone.now() + timezone.timedelta(days=7)
 
+def today():
+    return timezone.now() 
+
 class ToDoList(models.Model):
     title = models.CharField(max_length=100, unique=True)
 
     def get_absolute_url(self):
-        return reverse("list", args=[self.id])
+        return reverse("api:list", args=[self.id])
 
     def __str__(self):
         return self.title
@@ -20,12 +23,12 @@ class ToDoItem(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateTimeField(default=one_week_hence)
+    due_date = models.DateTimeField(default=today)
     todo_list = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse(
-            "item-update", args=[str(self.todo_list.id), str(self.id)]
+            "api:item-update", args=[str(self.todo_list.id), str(self.id)]
         )
 
     def __str__(self):

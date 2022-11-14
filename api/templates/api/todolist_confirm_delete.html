@@ -50,16 +50,20 @@
 
                 <p>Are you sure you want to delete the list <i>{{ object.title }}</i>?</p>
 
-                <form method="POST">
+                <form method="POST" class="card-body mb-2">
                     {% csrf_token %}
-                    <input
-                        value="Yes, delete."
-                        type="submit">
+                    <button 
+                    type="submit"
+                    class="btn btn-danger font-weight-bold">
+                        Yes, delete
+                    </button>
                 </form>
-                <input
-                    value="Cancel"
+                <button
+                    class="btn btn-primary font-weight-bold"
                     type="button"
                     onclick=location.href='{% url "api:index" %}'>
+                    Cancel
+                </button>
 
                 <!-- Content end -->
 
