@@ -8,8 +8,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 onclick=location.href='{% url "api:index" %}'>
-              Django To-do Lists
+            <h1 <li class="breadcrumb-item"><a href="{% url 'api:index' %}"></li>
+              DJango To-do Lists
           </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
@@ -29,7 +29,9 @@
         <div class="row mb-2">
           <div class="col-12 card">
             <div class="card-header">
-              <h1 class="card-title">List of Reports</h1>
+              <h1 class="card-title">
+                {% comment %} To Do List {% endcomment %}
+              </h1>
              
                 <button class="btn btn-sm btn-danger ml-2 font-weight-bold" onClick="window.location.reload();" title="Click here to Reload the Page.">
                   Reload
@@ -53,7 +55,7 @@
               <!-- Content start -->
               <div>
                 {% if object_list %}
-                <h3>All my lists</h3>
+                <h3>Sourav All Lists</h3>
                 {% endif %}
                 <ul>
                     {% for todolist in object_list %}
@@ -70,10 +72,10 @@
                 </ul>
                 <p>
                   <input
-                      value="Add a new list"
-                      type="button"
-                      onclick=location.href='{% url "api:list-add" %}'/>
-              </p>
+                  value="Add a new list"
+                  type="button"
+                  onclick=location.href='{% url "api:list-add" %}'/>
+                </p>
               </div>
               <!-- Content end -->
 
