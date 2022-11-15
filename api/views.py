@@ -13,13 +13,17 @@ from .models import ToDoList, ToDoItem
 def index(request):
     return HttpResponse("Hello World!")
 
+from django.db.models import Count
 def home_view(request):
     all_list = ToDoList.objects.all()
     all_items = ToDoItem.objects.all()
     count_items=ToDoItem.objects.count()
-    home = "Home"
+    count_list=ToDoItem.objects.all() \
+                .annotate(item_count=Count('id')) \
+                .order_by('-item_count')
+    home = count_items  #"Home"
     print(home)
-    context={'home': home, "all_list":all_list, "all_items":all_items,"count_items":count_items}
+    context={'home': home, "all_list":all_list, "all_items":all_items,"count_items":count_items,"count_list":count_list}
     return render(request, 'api/home.html',context)
 
 
