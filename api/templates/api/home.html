@@ -30,14 +30,14 @@
         <div class="row mb-2">
           <div class="col-12 card">
             <div class="card-header">
-              <h1 class="card-title">List of Reports</h1>
+              <h1 class="card-title">Update To Do List</h1>
              
                 <button class="btn btn-sm btn-danger ml-2 font-weight-bold" onClick="window.location.reload();" title="Click here to Reload the Page.">
                   Reload
                 </button>
              
             </div>
-
+                
                 {% if messages %}
                 <div class="row">
                   <div class="col-md-12">
@@ -49,7 +49,36 @@
                   </div>
                 </div>
                 {% endif %}
+
               <!-- Content start -->
+              {{ count_list }}
+              <br>
+              <div class="align-middle">
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-danger">
+                    <div class="inner">
+                      <span class="text-center">
+                        <h3>{{ home }}</h3>
+                        <p>No of To Do List</p>
+                      </span>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-file-signature"></i>
+                    </div>
+                    <a href="{% url 'api:index' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
+              </div>
+              
+
+              <br>
+              <span class="badge bg-warning content-body font-italic">
+                <h3> Total Number of List Itms: {{ home }}</h3> 
+              </span>
+              <br>
               <div>
                 <ul>
                   {% for todo in all_list %}
