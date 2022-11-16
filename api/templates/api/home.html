@@ -51,13 +51,12 @@
                 {% endif %}
 
               <!-- Content start -->
-              {{ count_list }}
               <br>
               <div class="align-middle">
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-12 col-6">
                   <!-- small box -->
-                  <div class="small-box bg-danger">
+                  <div class="small-box bg-green">
                     <div class="inner">
                       <span class="text-center">
                         <h3>{{ home }}</h3>
@@ -73,27 +72,40 @@
                 <!-- ./col -->
               </div>
               
-
               <br>
-              <span class="badge bg-warning content-body font-italic">
-                <h3> Total Number of List Itms: {{ home }}</h3> 
-              </span>
-              <br>
-              <div>
-                <ul>
-                  {% for todo in all_list %}
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {% for items in all_items %}
-                      {{ todo.title }}||{{todo.title}}
-                        <span class="badge badge-primary badge-pill">{{ todo.count_items }}</span>
-                        <input class="form-check-input me-8" type="checkbox" value="" aria-label="..."/>
-                    {% endfor %}
-                  </li>
-                  {% empty %}
-                  <h2 class="badge bg-warning font-italic">There are no to-do items in this list.</h2>
-                  {% endfor %}
-                </ul>
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" id="table_id">
+                  <thead>
+                      <tr>
+                          <th>SL. No</th>
+                          <th>List ID</th>
+                          <th>Title</th>
+                          <th>ToDo List ID</th>
+                          <th>Description</th>
+                          <th>Creation Date</th>
+                          <th>Due Date</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for lst in count_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ lst.id }}</td>
+                        <td>{{ lst.title }}</td>
+                        <td>{{ lst.todo_list_id }}</td>
+                        <td>{{ lst.description }}</td>
+                        <td>{{ lst.created_date }}</td>
+                        <td>{{ lst.due_date }}</td>
+                        <td><a class="btn btn-sm btn-danger" onclick=location.href='{% url "api:item-update" lst.id lst.id %}' title="Click here to Print or View To Do List." target="_blank">
+                          <i class="fa fa-print" aria-hidden="true"></i> <b>Edit/View List</b></a></td>
+                    </tr>
+                   {% endfor %}
+                  </tbody>
+              </table>
               </div>
+              
+              
       
               <!-- Content end -->
 
