@@ -17,7 +17,7 @@ from django.db.models import Count
 def home_view(request):
     all_list = ToDoList.objects.all()
     all_items = ToDoItem.objects.all()
-    count_items=ToDoItem.objects.count() 
+    count_items=ToDoList.objects.count() 
     count_list=ToDoItem.objects.all() \
                 .annotate(item_count=Count('id')) \
                 .order_by('-item_count')

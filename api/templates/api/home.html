@@ -51,6 +51,8 @@
                 {% endif %}
 
               <!-- Content start -->
+              
+              <!-- {{ count_items }} -->
               <br>
               <div class="align-middle">
                 <!-- ./col -->
@@ -78,9 +80,9 @@
                   <thead>
                       <tr>
                           <th>SL. No</th>
-                          <th>List ID</th>
-                          <th>Title</th>
                           <th>ToDo List ID</th>
+                          <!-- <th>List ID</th> -->
+                          <th>Title</th>
                           <th>Description</th>
                           <th>Creation Date</th>
                           <th>Due Date</th>
@@ -91,9 +93,9 @@
                     {% for lst in count_list %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ lst.id }}</td>
+                        <td>{{ lst.todo_list.title }}</td>
+                        <!-- <td>{{ lst.id }}</td> -->
                         <td>{{ lst.title }}</td>
-                        <td>{{ lst.todo_list_id }}</td>
                         <td>{{ lst.description }}</td>
                         <td>{{ lst.created_date }}</td>
                         <td>{{ lst.due_date }}</td>
